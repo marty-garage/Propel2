@@ -694,7 +694,7 @@
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="abstract" type="xs:boolean" default="false">
+        <xs:attribute name="abstract" type="xs:boolean" default="true">
             <xs:annotation>
                 <xs:documentation xml:lang="en">
                     Whether the generated stub class will be abstract (e.g. if you're using inheritance)
