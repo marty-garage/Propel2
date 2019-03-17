@@ -55,7 +55,7 @@ PHP class or method name.
   idMethod (native|autoincrement|sequence|none|null) "null"
   skipSql (true|false) "false"
   readOnly (true|false) "false"
-  abstract (true|false) "true"
+  abstract (true|false) "false"
   isCrossRef (true|false) "false"
   allowPkInsert (true|false) "false"
   package CDATA #IMPLIED
