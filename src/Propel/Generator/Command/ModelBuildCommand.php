@@ -123,6 +123,47 @@ class ModelBuildCommand extends AbstractCommand
         $manager->setFilesystem($this->getFilesystem());
         $manager->setGeneratorConfig($generatorConfig);
         $manager->setSchemas($this->getSchemas($generatorConfig->getSection('paths')['schemaDir'], $generatorConfig->getSection('generator')['recursive']));
+       
+            
+         $output->writeln('SCHEMA IN manager of MODEL BUILDER:'.var_dump(array_keys($manager->getSchemas())));
+        //TODO for every table in the schema add the behaviour inhrithing from CI_Model
+        // adding CI_Model table
+        $xml = simplexml_load_file(array_keys($manager->getSchemas())[0]);
+        // Create a child in the first topic node
+        
+        //for every table in the schema add the behaviour inhrithing from CI_Model
+        $beaviour = new \SimpleXMLElement('<behavior name="concrete_inheritance">
+            <parameter/><parameter />  </behavior>');
+        foreach($xml->table as $table){
+            $current_behav = $table->addChild($beaviour->getName(), (string) $beaviour);
+            foreach($beaviour->attributes() as $n => $v) { 
+                $current_behav->addAttribute($n, $v); 
+            }
+            $i = 0; 
+            foreach($beaviour->children() as $children){
+                $param = $current_behav->addChild($children->getName(),(string)$children);
+                $output->writeln(var_dump($indx));
+                if($i%2==0){
+                    $param->addAttribute('name','extends');
+                    $param->addAttribute('value','CI_Model');  
+                }else{      
+                    $param->addAttribute('name','copy_data_to_parent');
+                    $param->addAttribute('value','false');
+                }
+                $i++;
+            }
+        }
+  
+        $database = $xml[0];
+        $child = $database->addChild("table");
+        // Add the text attribute
+        $child->addAttribute("name", "CI_Model");
+        //idMethod="native" phpName="Category
+        $child->addAttribute("idMethod", "native");
+        $child->addAttribute("phpName", "CI_Model");
+        
+        $xml->asXML(array_keys($manager->getSchemas())[0]);
+        
         $manager->setLoggerClosure(function ($message) use ($input, $output) {
             if ($input->getOption('verbose')) {
                 $output->writeln($message);
