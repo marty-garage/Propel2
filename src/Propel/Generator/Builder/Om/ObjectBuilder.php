@@ -240,7 +240,7 @@ class ObjectBuilder extends AbstractObjectBuilder
         }
 
         $script .= "
-abstract class ".$this->getUnqualifiedClassName().$parentClass." implements ActiveRecordInterface ";
+class ".$this->getUnqualifiedClassName().$parentClass." implements ActiveRecordInterface ";
 
         if ($interface = $this->getInterface()) {
             $script .= ", Child" . ClassTools::classname($interface);
