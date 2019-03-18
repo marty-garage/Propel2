@@ -28,7 +28,10 @@ Read the [Propel documentation](http://propelorm.org/documentation/01-installati
 This fork is dedicated to obtein a better and faster integration of propel reverse database use in codeigniter.
 Every model generated extend from CI_Model, every use of namespace is ignored or removed, autoload of models generated into
 codeigniter structure directory.
-Run propel from a 'models' subdirectory.
+Run propel from a 'models' subdirectory. Then in your controller
+
+$this -> load -> model('your_reverse_directory/generated-reversed-database/generated-classes/Table_name','TableName_model');
+$this -> TableName_model->isNew();
 
 
 
