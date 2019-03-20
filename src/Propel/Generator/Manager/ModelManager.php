@@ -54,6 +54,8 @@ class ModelManager extends AbstractManager
                 $this->log(' - Database: ' . $database->getName());
 
                 foreach ($database->getTables() as $table) {
+                     if($table->getName() === 'CI_Model')
+                        continue;
                     if (!$table->isForReferenceOnly()) {
                         $nbWrittenFiles = 0;
                         $this->log('  + Table: ' . $table->getName());
