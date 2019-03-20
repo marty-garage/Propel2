@@ -1,6 +1,6 @@
 # Propel2
 
-Propel2 is an open-source Object-Relational Mapping (ORM) for PHP 5.5 and up.
+Otimized Codeigniter Propel2, is an open-source Object-Relational Mapping (ORM) for PHP 5.5 and up.
 
 
 ## Requirements
