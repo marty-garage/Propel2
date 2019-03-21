@@ -172,7 +172,7 @@ class ModelBuildCommand extends AbstractCommand
         var_dump($models_path);
         $template = "<?php
 
-class ci_propel_autoloader {
+class Ci_propel_autoloader {
 
     public function __construct() {
         \$this->init_autoloader();
