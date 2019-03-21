@@ -215,7 +215,7 @@ class QueryBuilder extends AbstractOMBuilder
  * @method     {$modelClass}[]|\\Propel\\Runtime\\Util\\PropelModelPager paginate(\$page = 1, \$maxPerPage = 10, ConnectionInterface \$con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
-abstract class ".$this->getUnqualifiedClassName()." extends " . $parentClass . "
+abstract class ".$this->getUnqualifiedClassName().($parentClass!='ChildCI_ModelQuery'?" extends " . $parentClass : ""). "
 {
     ";
     }
