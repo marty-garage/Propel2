@@ -190,7 +190,8 @@ class Ci_propel_autoloader {
                 //require_once(APPPATH.'models/".$models_path[2]."generated-reversed-database/generated-classes/Base/".ucfirst($table['name'])."Query.php');";
             }
             $template.=
-            "      }); 
+            "     
+            }); 
                 }
             }";
         file_put_contents($models_path[1].'ci_propel_autoloader.php', $template, LOCK_EX);
