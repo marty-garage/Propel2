@@ -184,10 +184,11 @@ class Ci_propel_autoloader {
             ";
             
             foreach($xml->table as $table){
+                if(strcasecmp($table['name'],'CI_Model')===0) continue;
                 $template.=
                 "
                 require_once(APPPATH.'models/".$models_path[2]."generated-reversed-database/generated-classes/Base/".ucfirst($table['name']).".php');
-                //require_once(APPPATH.'models/".$models_path[2]."generated-reversed-database/generated-classes/Base/".ucfirst($table['name'])."Query.php');";
+                require_once(APPPATH.'models/".$models_path[2]."generated-reversed-database/generated-classes/Base/".ucfirst($table['name'])."Query.php');";
             }
             $template.=
             "     
