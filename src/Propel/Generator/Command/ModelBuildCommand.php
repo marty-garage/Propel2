@@ -164,30 +164,32 @@ class ModelBuildCommand extends AbstractCommand
         
         $xml->asXML(array_keys($manager->getSchemas())[0]);
         
-        //-------------------------
+    //-------------------------
         //TODO:test this
-        preg_match('(.+[/\\]models[/\\])(.+[/\\]).+', basename(array_keys($manager->getSchemas())[0]),$models_path);//array_keys($manager->getSchemas())
+        preg_match('/(.+\/models\/)(\w+\/)\w+/', array_keys($manager->getSchemas())[0],$models_path);//array_keys($manager->getSchemas())
        
-        $autoload_location = __DIR__.'/../../../vendor/autoload.php';
+        $autoload_location = __DIR__.'/../../../../vendor/autoload.php';
+        var_dump($models_path);
         $template = "<?php
 
 class ci_propel_autoloader {
 
     public function __construct() {
-        $this->init_autoloader();
+        \$this->init_autoloader();
     }
 
     private function init_autoloader(){
-        spl_autoload_register(function($classname){
-            require({$autoload_location});
+        spl_autoload_register(function(\$classname){
+            require('{$autoload_location}');
             ";
             
             foreach($xml->table as $table){
-                $template+=
+                $template.=
                 "
-                require(APPPATH.'models/".$models_path[2]."generated-reversed-database/generated-classes/Base/".$table->getName().".php');";
+                require(APPPATH.'models/".$models_path[2]."generated-reversed-database/generated-classes/Base/".ucfirst($table['name']).".php');
+                require(APPPATH.'models/".$models_path[2]."generated-reversed-database/generated-classes/Base/".ucfirst($table['name'])."Query.php');";
             }
-            $template+=
+            $template.=
             "      }); 
                 }
             }";
